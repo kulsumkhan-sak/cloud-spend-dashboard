@@ -10,9 +10,10 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins(
-                "https://calm-mud-00bc83d001.azurestaticapps.net",
-                "http://localhost:3000"
-            )
+    "https://cloudspend-frontend.azurestaticapps.net",
+    "https://calm-mud-00bc83d001.azurestaticapps.net",
+    "http://localhost:3000"
+)
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -31,3 +32,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();                        // ✅ ONLY ONE Run
+
