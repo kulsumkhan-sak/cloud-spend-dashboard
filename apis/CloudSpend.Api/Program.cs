@@ -21,15 +21,15 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<UserRepository>();
 
 var app = builder.Build();
-
-app.UseRouting();                 // ✅ FIRST
 app.UseCors("FrontendPolicy");    // ✅ AFTER routing, BEFORE auth
+app.UseRouting();                 // ✅ FIRST
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 Console.WriteLine("🔥 NEW CORS VERSION DEPLOYED 🔥");
 app.Run();                        // ✅ ONLY ONE Run
+
 
 
 
