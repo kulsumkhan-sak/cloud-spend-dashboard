@@ -22,18 +22,6 @@ builder.Services.AddScoped<UserRepository>();
 var app = builder.Build();
 
 app.UseRouting();
-
-app.Use(async (context, next) =>
-{
-    if (context.Request.Method == HttpMethods.Options)
-    {
-        context.Response.StatusCode = StatusCodes.Status204NoContent;
-        return;
-    }
-
-    await next();
-});
-
 app.UseCors("FrontendPolicy");
 
 app.UseAuthentication();
@@ -42,6 +30,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 
 
 
