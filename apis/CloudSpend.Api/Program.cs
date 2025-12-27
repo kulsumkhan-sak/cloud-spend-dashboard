@@ -15,12 +15,7 @@ builder.Services.AddCors(options =>
 });
 
 /* ✅ REGISTER REPO PROPERLY */
-builder.Services.AddScoped<UserRepository>(sp =>
-{
-    var configuration = sp.GetRequiredService<IConfiguration>();
-    var connectionString = configuration.GetConnectionString("CloudSpendDb");
-    return new UserRepository(connectionString!);
-});
+builder.Services.AddScoped<UserRepository>();
 
 var app = builder.Build();
 

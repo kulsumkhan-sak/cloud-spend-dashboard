@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace CloudSpend.Api.Repos
 {
@@ -6,9 +7,11 @@ namespace CloudSpend.Api.Repos
     {
         private readonly string _connectionString;
 
-        public UserRepository(string connectionString)
+        public UserRepository(IConfiguration configuration)
         {
-            _connectionString = connectionString;
+            _connectionString =
+                configuration.GetConnectionString("DefaultConnection")
+                ?? throw new Exception("DefaultConnection is missing");
         }
 
         public string? GetPasswordHashByEmail(string email)
