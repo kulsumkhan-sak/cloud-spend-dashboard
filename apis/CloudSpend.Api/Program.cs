@@ -27,8 +27,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+Console.WriteLine("🔥 NEW CORS VERSION DEPLOYED 🔥");
 app.Run();                        // ✅ ONLY ONE Run
+
 
 
 
