@@ -4,7 +4,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-/* ✅ CORS */
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
@@ -15,23 +14,20 @@ builder.Services.AddCors(options =>
                 "http://localhost:3000"
             )
             .AllowAnyHeader()
-            .AllowAnyMethod();   // ❌ NO AllowCredentials
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
-/* ✅ DI */
 builder.Services.AddScoped<UserRepository>();
 
 var app = builder.Build();
 
-/* ✅ ORDER MATTERS */
-app.UseCors("FrontendPolicy");
-
-app.UseRouting();
-
+app.UseRouting();                 // ✅ FIRST
+app.UseCors("FrontendPolicy");    // ✅ AFTER routing, BEFORE auth
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run();                        // ✅ ONLY ONE Run
