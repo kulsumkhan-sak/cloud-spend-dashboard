@@ -15,8 +15,7 @@ builder.Services.AddCors(options =>
                 "http://localhost:3000"
             )
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowAnyMethod();   // ❌ NO AllowCredentials
     });
 });
 
@@ -26,7 +25,9 @@ builder.Services.AddScoped<UserRepository>();
 var app = builder.Build();
 
 /* ✅ ORDER MATTERS */
-app.UseCors("FrontendPolicy");   // MUST be before auth
+app.UseCors("FrontendPolicy");
+
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
