@@ -12,24 +12,27 @@ app.controller("LoginController", function ($scope, $http) {
     $scope.successMessage = "";
     $scope.errorMessage = "";
 
-    $http.post("http://localhost:5116/api/auth/login", {
-      email: $scope.user.email,
-      password: $scope.user.password
-    })
+    $http.post(
+      "http://localhost:5116/api/auth/login",
+      {
+        email: $scope.user.email,
+        password: $scope.user.password
+      },
+      {
+        withCredentials: true
+      }
+    )
     .then(function (response) {
-  console.log("API response:", response.data);
+      console.log("API response:", response.data);
 
-  $scope.$applyAsync(function () {
-    if (response.data.success) {
-      $scope.successMessage = response.data.message;
-    } else {
-      $scope.errorMessage = response.data.message;
-    }
-  });
-})
-
+      if (response.data.success) {
+        $scope.successMessage = response.data.message;
+      } else {
+        $scope.errorMessage = response.data.message;
+      }
+    })
     .catch(function (error) {
-      console.error(error);
+      console.error("Login error:", error);
       $scope.errorMessage = "Login failed";
     })
     .finally(function () {
