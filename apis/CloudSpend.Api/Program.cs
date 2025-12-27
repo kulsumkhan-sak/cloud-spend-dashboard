@@ -1,26 +1,36 @@
 using CloudSpend.Api.Repos;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+/* ✅ CORS */
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
+    options.AddPolicy("FrontendPolicy", policy =>
     {
         policy
-            .WithOrigins("http://localhost:3000")
+            .WithOrigins(
+                "https://calm-mud-00bc83d001.azurestaticapps.net",
+                "http://localhost:3000"
+            )
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
-/* ✅ REGISTER REPO PROPERLY */
+/* ✅ DI */
 builder.Services.AddScoped<UserRepository>();
 
 var app = builder.Build();
 
-app.UseCors("AllowFrontend");
-app.UseRouting();
+/* ✅ ORDER MATTERS */
+app.UseCors("FrontendPolicy");   // MUST be before auth
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
