@@ -10,15 +10,13 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins(
-    "https://cloudspend-frontend.azurestaticapps.net",
-    "https://calm-mud-00bc83d001.azurestaticapps.net",
-    "http://localhost:3000"
-)
+                "https://calm-mud-00bc83d001.azurestaticapps.net"            )
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
 });
+
 
 builder.Services.AddScoped<UserRepository>();
 
@@ -32,4 +30,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();                        // ✅ ONLY ONE Run
+
 
