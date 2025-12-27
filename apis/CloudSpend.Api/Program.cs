@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
             .WithOrigins(
                 "https://calm-mud-00bc83d001.azurestaticapps.net"            )
             .AllowAnyHeader()
-            .AllowAnyMethod()
+            .AllowAnyMethod();
     });
 });
 
@@ -29,6 +29,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();                        // ✅ ONLY ONE Run
+
 
 
 
