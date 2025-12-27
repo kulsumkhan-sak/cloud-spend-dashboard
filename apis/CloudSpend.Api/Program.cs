@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("FrontendPolicy", policy =>
     {
         policy
-            .WithOrigins("https://calm-mud-00bc83d001.azurestaticapps.net")
+            .WithOrigins("https://calm-mud-00bc83d00.1.azurestaticapps.net")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -31,3 +31,4 @@ app.MapControllers();
 Console.WriteLine("🔥 NEW CORS VERSION DEPLOYED 🔥");
 
 app.Run();
+
