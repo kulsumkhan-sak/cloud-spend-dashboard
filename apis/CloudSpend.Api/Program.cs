@@ -1,7 +1,5 @@
 using CloudSpend.Api.Repos;
 
-Console.WriteLine("🔥🔥🔥 API BOOTED WITH NEW BUILD 🔥🔥🔥");
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -30,6 +28,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 
 
 
